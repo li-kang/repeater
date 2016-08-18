@@ -4,36 +4,39 @@
 * 每本书籍一个目录
 
 ### 目录结构
-
-书名 (名字可以任意取)
-    book.json 书籍信息
-    catagory.json 书籍目录。只能支持到2级目录。
-    [bookid].mp3 文章的音频
-    [bookid].lrc 文章的信息数据
+- 书名 (名字可以任意取)
+    - book.json 书籍信息
+    - catagory.json 书籍目录。
+    - [bookid].mp3 文章的音频
+    - [bookid].lrc 文章的信息数据
 
 ### book.json 书籍信息
+```JSON
 {"Category":"新概念英语","ID":"08ac5587-2605-4015-a55a-9d8e39d3040b","Name":"新概念英语1","Total":102,"Version":1}
+```
 
 ### catagory.json 书籍目录
+* 只能支持到2级目录。
 
 ### lrc 文章的信息数据
 lrc文件的格式如果：
 ```
+[or:文件序号，如：第1课。]
 [ti:标题]
 [tt:标题的翻译]
 [al:书箱名]
-[ar:歌词文件作者]
-[or:文件序号，如：第1课。]
+[ar:文章作者]
+[by:歌词文件作者]
 
 [本名的开始时间点]原文^翻译
 ```
 这是一个例子：
 ```
+[or:Lesson 1]
 [ti:A private conversation]
 [tt:私人谈话]
 [al:新概念英语2]
 [ar:likang]
-[or:Lesson 1]
 
 [00:00.80]lesson 1  A private conversation^私人谈话
 
@@ -60,8 +63,12 @@ lrc文件的格式如果：
 
 和普通lrc文件相比有几点扩展：
 * 使用UTF-8编码格式
+* 歌词文件由两部分组成：前面是一组参数说明；后面是一组句子
+* 参数说明没有顺序，如果没有值可以不写。
 * 翻译和原文之间用^分开
 * 句子间的空行表示分段
+* 可以只有时间点没有原文和翻译
+
 
 
 
