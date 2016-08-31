@@ -2,13 +2,20 @@
 ## 书籍
 * 所有书籍放在Books目录下
 * 每本书籍一个目录
+```
+书籍目录的命名规范：
+类别-书名-原始语言-学习者语言-版本-随机标识
+
+例如：
+新闻-VOA英语-EN-CN-1.0-30F5
+```
 
 ### 目录结构
-- 书名 (名字可以任意取)
+- 书名
     - book.json 书籍信息
     - catagory.json 书籍目录。
-    - [bookid].mp3 文章的音频
-    - [bookid].lrc 文章的信息数据
+    - [articleFileName].mp3 每篇文章的音频
+    - [articleFileName].lrc 每篇文章的信息数据
 
 ### book.json 书籍信息
 ```JSON
