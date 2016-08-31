@@ -13,8 +13,8 @@
 ### 目录结构
 - 书籍目录
     - book.json 书籍信息（必须）
-    - logo.png 书籍的logo（尺寸：64px *　64px）
-    - book_bar.png 书籍的图片（尺寸：）
+    - logo.png 书籍的logo（尺寸：64px*64px）
+    - book_bar.jpg 书籍的图片（尺寸：600px*350px）
     - catagory.json 书籍目录（必须）
     - [articleFileName].mp3 每篇文章的音频
     - [articleFileName].lrc 每篇文章的信息数据
