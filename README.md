@@ -12,14 +12,16 @@
 
 ### 目录结构
 - 书名
-    - book.json 书籍信息
-    - catagory.json 书籍目录。
+    - book.json 书籍信息（必须）
+    - logo.png 书籍的logo（尺寸：）
+    - book_bar.png 书籍的图片（尺寸：）
+    - catagory.json 书籍目录（必须）
     - [articleFileName].mp3 每篇文章的音频
     - [articleFileName].lrc 每篇文章的信息数据
 
 ### book.json 书籍信息
 ```JSON
-{"Category":"新概念英语","ID":"08ac5587-2605-4015-a55a-9d8e39d3040b","Name":"新概念英语1","Total":102,"Version":1}
+{"category":"新闻", "name":"VOA英语", "sourceLang":"EN", "targetLang":"CN", "id":"30F5", "total":102, "version":1, "author":"likang"}
 ```
 
 ### catagory.json 书籍目录
