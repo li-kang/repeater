@@ -33,7 +33,24 @@
 * 只能支持到2级目录。
 * catagory.json的完整表示如下：
 ```JSON
-{"category":"新闻", "name":"VOA英语", "sourceLang":"EN", "targetLang":"CN", "id":"30F5", "total":102, "version":1, "author":"likang"}
+[
+	{
+		"part":"Unit 1", 
+		"articles":[
+			{"title":"Volcanoes ","titleTranslation":"火山","duration":82524,"mediaSize":330096,"order":"Lesson 67","file":"NCE267"},
+			{"title":"Volcanoes ","titleTranslation":"火山","duration":82524,"mediaSize":330096,"order":"Lesson 67","file":"NCE267"},
+			{"title":"Volcanoes ","titleTranslation":"火山","duration":82524,"mediaSize":330096,"order":"Lesson 67","file":"NCE267"}
+		]
+	},
+	{
+		"part":"Unit 2", 
+		"articles":[
+			{"title":"Volcanoes ","titleTranslation":"火山","duration":82524,"mediaSize":330096,"order":"Lesson 67","file":"NCE267"},
+			{"title":"Volcanoes ","titleTranslation":"火山","duration":82524,"mediaSize":330096,"order":"Lesson 67","file":"NCE267"},
+			{"title":"Volcanoes ","titleTranslation":"火山","duration":82524,"mediaSize":330096,"order":"Lesson 67","file":"NCE267"}
+		]
+	}
+]
 ```
 
 ### lrc 文章的信息数据
