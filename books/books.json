@@ -1,0 +1,6 @@
+﻿[
+{"category":"新概念", "name":"新概念英音第一册", "sourceLang":"EN", "targetLang":"CN", "id":"0000", "total":72, "version":"1.0", "author":"李舜生"},
+{"category":"新概念", "name":"新概念英音第二册", "sourceLang":"EN", "targetLang":"CN", "id":"0000", "total":96, "version":"1.0", "author":"王留美"},
+{"category":"新概念", "name":"新概念英音第三册", "sourceLang":"EN", "targetLang":"CN", "id":"0000", "total":60 "version":"1.0", "author":"btw"},
+{"category":"新闻", "name":"VOA英语", "sourceLang":"EN", "targetLang":"CN", "id":"30F5", "total":102, "version":"1.0", "author":"voa"}
+]
