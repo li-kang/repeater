@@ -27,7 +27,7 @@
 ### catagory.json 书籍目录
 * 此文件用来组织每一篇文章。每篇文章的数据表示为：
 ```JSON
-{"category":"新闻", "name":"VOA英语", "sourceLang":"EN", "targetLang":"CN", "id":"30F5", "total":102, "version":1, "author":"likang"}
+{"title":"Volcanoes ","titleTranslation":"火山","duration":82524,"mediaSize":330096,"order":"Lesson 67","file":"NCE267"}
 ```
 
 * 只能支持到2级目录。
