@@ -11,9 +11,9 @@
 ```
 
 ### 目录结构
-- 书名
+- 书籍目录
     - book.json 书籍信息（必须）
-    - logo.png 书籍的logo（尺寸：）
+    - logo.png 书籍的logo（尺寸：64px *　64px）
     - book_bar.png 书籍的图片（尺寸：）
     - catagory.json 书籍目录（必须）
     - [articleFileName].mp3 每篇文章的音频
@@ -25,7 +25,16 @@
 ```
 
 ### catagory.json 书籍目录
+* 此文件用来组织每一篇文章。每篇文章的数据表示为：
+```JSON
+{"category":"新闻", "name":"VOA英语", "sourceLang":"EN", "targetLang":"CN", "id":"30F5", "total":102, "version":1, "author":"likang"}
+```
+
 * 只能支持到2级目录。
+* catagory.json的完整表示如下：
+```JSON
+{"category":"新闻", "name":"VOA英语", "sourceLang":"EN", "targetLang":"CN", "id":"30F5", "total":102, "version":1, "author":"likang"}
+```
 
 ### lrc 文章的信息数据
 lrc文件的格式如果：
