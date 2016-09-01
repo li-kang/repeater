@@ -154,7 +154,7 @@ Player.prototype.sectionOnce = function () {
     }
 };
 Player.prototype.goStart = function () {
-	if (this.domAudio.readyState == this.domAudio.HAVE_ENOUGH_DATA)
+//	if (this.domAudio.readyState == this.domAudio.HAVE_ENOUGH_DATA)
     	this.seek(this.sectionStart);
 };
 
