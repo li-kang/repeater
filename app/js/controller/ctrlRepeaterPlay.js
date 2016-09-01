@@ -25,7 +25,7 @@ angular.module("myapp").controller("ctrlRepeaterPlay", function($scope, articleO
 			$scope.player.gapTime = 0;
 			$scope.setPlayMode(MODE_NORMAL);
 			$scope.player.autoplay = true;
-			$scope.player.play();
+			$scope.play();
 
 			// 获取Sections
 			sectionLength = article.Sections.length;
@@ -66,6 +66,10 @@ angular.module("myapp").controller("ctrlRepeaterPlay", function($scope, articleO
 				break;
 		}
 	}
+	
+//	$scope.player.onStateChanged = function() {
+//		
+//	}
 
 	//播放完段落一次
 	$scope.player.onSectionOnce = function(){
@@ -102,7 +106,7 @@ angular.module("myapp").controller("ctrlRepeaterPlay", function($scope, articleO
 
 	};
 
-	$scope.onOff = true;
+	$scope.onOff = false;
 
 	$scope.play = function() {
 		if($scope.onOff) {

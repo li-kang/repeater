@@ -2,6 +2,7 @@ function Player() {
     //变量声明
     this.domAudio = null;//音频对象
     this.mode = Player.MODE_NORMAL; //播放模式
+    this.state = 0; // 播放状态
 
     //------------复读小节----------
     this.sectionStart = 0;//播放开始小节
@@ -65,9 +66,20 @@ Player.prototype.open = function (url) {
 	    var audioBox = document.createElement("audio");
 	    audioBox.innerHTML = "抱歉，您的浏览器暂不支持音频播放！";
 	    this.domAudio = audioBox;//获取音频对象
-	    this.domAudio.onreadystatechange = this._onreadystatechange;
+//	    this.domAudio.onreadystatechange = this._onreadystatechange;
+		var _this = this;
+		this.domAudio.onpause = function() {
+			_this.setState(0);
+		};
+		this.domAudio.onplaying = function() {
+			_this.setState(1);
+		};
+		this.domAudio.onwaiting = function() {
+			_this.setState(2);
+		};
     }
     this.domAudio.src = url;
+    this.domAudio.load();
     //初始化变量
     this.sectionStart = 0;//初始化音频起始点
     this.sectionEnd = 0;//初始化音频结束点
@@ -92,6 +104,14 @@ Player.prototype.pause = function () {
     this.domAudio.pause();
     // TODO //清除句间停顿定时器 clearTimeout(Player._gapInterval); ？
 };
+
+Player.prototype.setState = function(value) {
+	this.state = value;
+	
+	if (typeof(this.onStateChanged)=="function"){
+		this.onStateChanged(value);
+	}
+}
 
 Player.prototype._outSection = function() {
     return this.domAudio.currentTime > this.sectionEnd || this.domAudio.currentTime < this.sectionStart;
@@ -139,11 +159,9 @@ Player.prototype.goStart = function () {
 };
 
 Player.prototype.seek = function(position) {
-	if (position < 0 || position > this.domAudio.duration)
-		return;
-
 	this.domAudio.currentTime = position;
 }
 
 // 事件
 Player.prototype.onSectionOnce = null; // 小节播放完1次
+Player.prototype.onStateChanged = null; // 

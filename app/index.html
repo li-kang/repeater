@@ -34,11 +34,8 @@
 		#item1 p {font-size: 26px; line-height: 36px;}
 		#item2 span {font-size: 20px; line-height: 26px;}
     </style>
-    
-    
 </head>
 <body>
-	
 	<!-- 主界面移动、菜单不动 -->
 	<div ng-controller="ctrlRepeater">
 		<header class="mui-bar mui-bar-nav">
@@ -46,7 +43,6 @@
 	      <h1 class="mui-title">标题</h1>
 	    </header>
 		<nav id="b-foot" class="mui-bar mui-bar-footer mui-row" ng-controller="ctrlRepeaterPlay">
-			<!--{{player.domAudio.readyState}}-->
 		    <region id="player_region" total="sectionTotal" start="sectionStart" end="sectionEnd"></region>
 		    <a class="mui-col-xs-2" ng-click="onNumFn()">
 		        <span class="mui-icon iconfont icon-shunxuxunhuan" ng-show="showMode_normal(onNum)"></span>
