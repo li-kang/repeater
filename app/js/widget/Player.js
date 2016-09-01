@@ -1,7 +1,6 @@
 function Player() {
     //变量声明
     this.domAudio = null;//音频对象
-    this._playInterval = null;//定时监听
     this.mode = Player.MODE_NORMAL; //播放模式
 
     //------------复读小节----------
@@ -35,7 +34,7 @@ Player.prototype.section = function(start, end) {
     }
 };
 
-//获取或设置静音开关 TODO this.muted = false;
+//获取或设置静音开关 
 Player.prototype.muted = function(value) {
     if (arguments.length == 0) {
         return this.domAudio.muted;
@@ -66,6 +65,7 @@ Player.prototype.open = function (url) {
 	    var audioBox = document.createElement("audio");
 	    audioBox.innerHTML = "抱歉，您的浏览器暂不支持音频播放！";
 	    this.domAudio = audioBox;//获取音频对象
+	    this.domAudio.onreadystatechange = this._onreadystatechange;
     }
     this.domAudio.src = url;
     //初始化变量
@@ -78,18 +78,11 @@ Player.prototype.play = function () {
     console.info("音频开始播放");
     this.domAudio.play();//播放
 
-  var _this = this;
-	this.domAudio.ontimeupdate = function(){
-        _this.positionChanged();
-	
+	var _this = this;
+	this.domAudio.ontimeupdate = function() {
+		_this.positionChanged();
 	}
-
-
-//  
-//  this._playInterval = setInterval(function(){
-//  	_this.positionChanged()
-//  }, 330);
-
+	
 	//清除句间停顿定时器
 	clearTimeout(Player._gapInterval);
 };
@@ -97,20 +90,18 @@ Player.prototype.play = function () {
 //音频暂停
 Player.prototype.pause = function () {
     this.domAudio.pause();
-    //清除音频播放interval
-    clearInterval(this._playInterval);
     // TODO //清除句间停顿定时器 clearTimeout(Player._gapInterval); ？
 };
 
 Player.prototype._outSection = function() {
-    return this.domAudio.currentTime > this.sectionEnd || this.domAudio.currentTime < this.sectionStart
+    return this.domAudio.currentTime > this.sectionEnd || this.domAudio.currentTime < this.sectionStart;
 };
 
 //播放状态改变
 Player.prototype.positionChanged = function () {
 
-    if (this._outSection()) {//
-        console.info("切换段落完成成功！" + this.domAudio.currentTime + ",  " + this.sectionStart + ", " + this.sectionEnd);
+    if (!this.domAudio.seeking && this.domAudio.currentTime > this.sectionEnd) {//
+        console.info("切换段落完成成功！" + this.domAudio.currentTime + "," + this.sectionStart + ", " + this.sectionEnd);
         this.sectionOnce();
     }
 };
@@ -144,8 +135,15 @@ Player.prototype.sectionOnce = function () {
 };
 Player.prototype.goStart = function () {
 	if (this.domAudio.readyState == this.domAudio.HAVE_ENOUGH_DATA)
-    	this.domAudio.currentTime = this.sectionStart;
+    	this.seek(this.sectionStart);
 };
+
+Player.prototype.seek = function(position) {
+	if (position < 0 || position > this.domAudio.duration)
+		return;
+
+	this.domAudio.currentTime = position;
+}
 
 // 事件
 Player.prototype.onSectionOnce = null; // 小节播放完1次

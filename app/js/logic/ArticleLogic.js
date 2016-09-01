@@ -16,10 +16,10 @@ ArticleLogic.prototype.getLrcFn = function(data) {
 			Duration: lrc.lines[lrc.lines.length - 1].time
 		};
 	};
-	//					lrcFn.prototype.categoryIDfn = function (id){ //获取categoryID的方法
-	//						var re = /\w+\s\d+/
-	//						return id.match(re)[0]
-	//					}
+//					lrcFn.prototype.categoryIDfn = function (id){ //获取categoryID的方法
+//						var re = /\w+\s\d+/
+//						return id.match(re)[0]
+//					}
 	//获取中英文翻译
 	LrcFn.prototype.contentFn = function(lines) { 
 		var arr = [];

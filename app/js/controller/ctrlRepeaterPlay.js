@@ -18,7 +18,9 @@ angular.module("myapp").controller("ctrlRepeaterPlay", function($scope, articleO
 		onOpen: function(article) {
 			console.log(article);
 			// 初始化播放器
-			$scope.player.open("source/03.mp3");
+			var url = "https://li-kang.github.io/repeater/app/source/03.mp3";
+//			$scope.player.open("source/03.mp3");
+			$scope.player.open(url);
 			$scope.player.gapTurn = true;
 			$scope.player.gapTime = 0;
 			$scope.setPlayMode(MODE_NORMAL);

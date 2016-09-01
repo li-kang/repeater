@@ -31,7 +31,8 @@
 		.simple_cn {width: 100%; position: fixed;left: 0;}
 		.simple_en {width: 100%; position: fixed;left: 0; top: 50%;}
 		.simple_icon{position: absolute;right:3px;top:-20px;color: #000000;}
-		#item1 p,#item2 span {font-size: 16px; lline-height: 24px;}
+		#item1 p {font-size: 26px; line-height: 36px;}
+		#item2 span {font-size: 20px; line-height: 26px;}
     </style>
     
     
@@ -45,6 +46,7 @@
 	      <h1 class="mui-title">标题</h1>
 	    </header>
 		<nav id="b-foot" class="mui-bar mui-bar-footer mui-row" ng-controller="ctrlRepeaterPlay">
+			<!--{{player.domAudio.readyState}}-->
 		    <region id="player_region" total="sectionTotal" start="sectionStart" end="sectionEnd"></region>
 		    <a class="mui-col-xs-2" ng-click="onNumFn()">
 		        <span class="mui-icon iconfont icon-shunxuxunhuan" ng-show="showMode_normal(onNum)"></span>
