@@ -3,6 +3,7 @@ function Player() {
     this.domAudio = null;//音频对象
     this.mode = Player.MODE_NORMAL; //播放模式
     this.state = 0; // 播放状态
+    this.isSeeking = false;
 
     //------------复读小节----------
     this.sectionStart = 0;//播放开始小节
@@ -120,7 +121,7 @@ Player.prototype._outSection = function() {
 //播放状态改变
 Player.prototype.positionChanged = function () {
 
-    if (!this.domAudio.seeking && this.domAudio.currentTime > this.sectionEnd) {//
+    if (!isSeeking && this.domAudio.currentTime > this.sectionEnd) {//
         console.info("切换段落完成成功！" + this.domAudio.currentTime + "," + this.sectionStart + ", " + this.sectionEnd);
         this.sectionOnce();
     }
@@ -159,7 +160,19 @@ Player.prototype.goStart = function () {
 };
 
 Player.prototype.seek = function(position) {
-	this.domAudio.currentTime = position;
+	var _this = this;
+	isSeeking = true;
+	
+	var timeout = setInterval(doseek, 100);
+	function doseek(){
+		if (_this.domAudio.readyState == _this.domAudio.HAVE_ENOUGH_DATA){
+			_this.domAudio.currentTime = position;
+			clearTimeout(timeout);
+			console.log("clearTimeout");
+			isSeeking = false;
+		}
+	};
+	
 }
 
 // 事件
