@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <link href="css/mui.css" rel="stylesheet"/>
+    <script src="js/lib/mui.min.js"></script>
+    <script src="js/lib/angular.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/widget/Lrc.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/widget/Player.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/logic/ArticleLogic.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/logic/ArticleObserve.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/common/app.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/filter/trustHtml.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/detictive/progressBar.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/controller/ctrlRepeater.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/controller/ctrlRepeaterArticle.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/controller/ctrlRepeaterPlay.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/controller/ctrlRepeaterSentence.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+      	mui.init();
+    </script>
+    
+    <style type="text/css">
+    	.focusa, .focus a{color: orange}
+        .wht{color: #ccc;}
+        .summaryTranslation span{}
+		.check{position: fixed;left: 3px;bottom: 50px;font-size: 18px;border-radius: 50%;border: 1px solid #000;padding: 3px;}
+		.return-top{position: fixed;left: 3px;bottom: 80px;font-size: 30px;}
+		.simple_cn {width: 100%; position: fixed;left: 0;}
+		.simple_en {width: 100%; position: fixed;left: 0; top: 50%;}
+		.simple_icon{position: absolute;right:3px;top:-20px;color: #000000;}
+		#item1 p,#item2 span {font-size: 16px; lline-height: 24px;}
+    </style>
+    
+    
+</head>
+<body>
+	
+	<!-- 主界面移动、菜单不动 -->
+	<div ng-controller="ctrlRepeater">
+		<header class="mui-bar mui-bar-nav">
+	      <a class="mui-icon mui-action-menu mui-icon-bars mui-pull-right"   ></a>
+	      <h1 class="mui-title">标题</h1>
+	    </header>
+		<nav id="b-foot" class="mui-bar mui-bar-footer mui-row" ng-controller="ctrlRepeaterPlay">
+		    <region id="player_region" total="sectionTotal" start="sectionStart" end="sectionEnd"></region>
+		    <a class="mui-col-xs-2" ng-click="onNumFn()">
+		        <span class="mui-icon iconfont icon-shunxuxunhuan" ng-show="showMode_normal(onNum)"></span>
+		        <span class="mui-icon iconfont icon-random" ng-show="showMode_random(onNum)"></span>
+		        <span class="mui-icon iconfont icon-dushu" ng-show="showMode_repeat(onNum)"></span>
+		    </a>
+		    <a class="mui-col-xs-2">
+		        <span class="mui-icon mui-icon-back" ng-click="observer.previous()"></span>
+		    </a>
+		    <a class="mui-col-xs-4" ng-click="play()">
+		        <span class="mui-icon iconfont icon-bofang" ng-show="!onOff" ></span>
+		        <span class="mui-icon iconfont icon-zantingjiasu" ng-show="onOff"></span>
+		    </a>
+		    <a class="mui-col-xs-2">
+		        <span class="mui-icon mui-icon-forward" ng-click="observer.next()"></span>
+		    </a>
+		    <a class="mui-col-xs-2">
+		        <span class="mui-icon iconfont icon-back" ng-click="player.goStart()"></span>
+		    </a>
+		    <div id="ctrl"></div>
+		</nav>
+		<div class="mui-content">
+			<div style="padding: 10px 10px;">
+	  	   		<div class="mui-segmented-control ">
+	      	   	    <a class="mui-control-item mui-active" href="#item1">单句</a>
+	      	   	    <a class="mui-control-item" href="#item2">全文</a>
+	      	   	</div>
+	  	   	</div>
+	  	   	<div>
+	  	   		<div id="item1" class="mui-active mui-control-content" ng-controller="ctrlRepeaterSentence">
+	      	   		<div class="simple_cn">
+	      	   			<p ng-show="iconeye">{{data.nowSentence}}</p>
+	      	   			
+	      	   		</div>
+	      	   		<div class="simple_en">
+	      	   			<p>{{data.nowTranslate}}</p>
+	      	   			<a class="simple_icon" ng-click="iconEyeFn()">
+					        <span class="mui-icon iconfont icon-xianshi" ng-show="iconeye"></span>
+					        <span class="mui-icon iconfont icon-yincangmima" ng-show="!iconeye"></span>
+					    </a>	
+	      	   		</div>
+	  	   		</div>
+	      	   	<div id="item2" class="mui-control-content" ng-controller="ctrlRepeaterArticle">
+	      	   		<div ng-repeat="section in paragaraphs track by $index" class="paragraph">
+				    	<p class="sentence">
+				      		<span 
+				      			ng-repeat="item in section track by $index" 
+				      			index="item.index"
+				      			ng-class="{true:'focusa'}[item.index==observer.sectionIndex]"
+				      			ng-click="onSectionSelected(item.index)">
+				      			{{item.sentence}}
+				      		</span>      		
+				    	</p>
+				    	<p class="translation" ng-show="ifShow">
+				    		<span 
+				      			ng-repeat="item in section track by $index" 
+				      			index="item.index"
+				      			ng-class="{true:'focusa'}[item.index==observer.sectionIndex]"
+				      			ng-click="onSectionSelected(item.index)">
+				      			{{item.translation}}
+				      		</span>     
+				    	</p>
+				    </div>
+				    <div class="check mui-icon iconfont icon-cubanfanyi " ng-click="clickShow()"></div>
+				    <div class="return-top mui-icon iconfont icon-dingbu"></div>
+	      	   	</div>
+	  	   	</div>
+		</div>
+	</div>
+</body>
+
+</html>
